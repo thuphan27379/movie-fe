@@ -1,0 +1,33 @@
+.sidebar {
+  width: 240px;
+}
+
+ul button {
+  width: 240px;
+  border: none;
+  cursor: pointer;
+  height: 30px;
+  background-color: transparent;
+  display: flex;
+  justify-content: left;
+  padding-left: 30px;
+}
+
+#myMenu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myMenu li a {
+  padding: 12px;
+  text-decoration: none;
+  color: black;
+  display: block;
+  cursor: pointer;
+}
+
+#myMenu li a:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
