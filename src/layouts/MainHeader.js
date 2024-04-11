@@ -1,21 +1,33 @@
 import * as React from "react";
-// https://www.w3schools.com/howto/howto_css_responsive_header.asp
 import "../css/Header.css";
+import "../css/Pagination.css";
 
-//
+// chinh lai css
 function MainHeader() {
+  //
   return (
     <>
       <div>
-        <div className="header">
+        <div className="header" style={{ maxHeight: "70px" }}>
           <p target="/" className="logo">
             Movie App
           </p>
-          <div className="header-right">
+
+          <div
+            className="header-right"
+            style={{
+              display: "flex",
+              float: "right",
+              alignItems: "center",
+              justifyContent: "center",
+              alignContent: "center",
+              lineHeight: 0,
+              padding: 0,
+              margin: 0,
+            }}
+          >
             <button target="/">About</button>
-            <button target="/" className="active">
-              Movie
-            </button>
+            <button target="/">Movie</button>
             <button target="/">TV Series</button>
             <button target="/">Account</button>
           </div>

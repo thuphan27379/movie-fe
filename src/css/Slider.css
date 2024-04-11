@@ -8,6 +8,11 @@
 .mySlides {
   display: none;
   width: 100%;
+  /* text {
+    fill: black;
+    stroke: red;
+    stroke-width: 3;
+  } */
 }
 
 /* Add a pointer when hovering over the thumbnail images */
@@ -45,12 +50,19 @@
 }
 
 /* Number text (1/3 etc) */
-.numbertext {
+.mySlides .numbertext {
   color: #f2f2f2;
-  font-size: 12px;
+  font-size: 18px;
   padding: 8px 12px;
   position: absolute;
   top: 0;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; /* Firefox 3.5+, Opera 9+, Safari 1+, Chrome, IE10 */
+  filter: progid:DXImageTransform.Microsoft.Glow(Color=#000,Strength=1); /* IE<10 */
+}
+
+.mySlides .text {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; /* Firefox 3.5+, Opera 9+, Safari 1+, Chrome, IE10 */
+  filter: progid:DXImageTransform.Microsoft.Glow(Color=#000,Strength=1); /* IE<10 */
 }
 
 /* Container for image text */

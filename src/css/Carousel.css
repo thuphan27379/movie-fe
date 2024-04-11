@@ -7,11 +7,18 @@
   max-width: 1000px;
   position: relative;
   margin: auto;
+  overflow: hidden;
+}
+
+.slides {
+  flex: 0 0 auto;
+  width: 100%;
+  scroll-snap-align: start;
 }
 
 /* Hide the images by default */
 .mySlides {
-  display: none;
+  display: block !important;
 }
 
 /* Next & previous buttons */

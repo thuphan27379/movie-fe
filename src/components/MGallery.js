@@ -1,51 +1,66 @@
 import React from "react";
+import { useEffect, useState } from "react";
+// import { Link } from "react-router-dom"; // <Link to="/" component={</>} >  </Link>
+import { useNavigate } from "react-router-dom";
 
 import "../css/Gallery.css";
-import img5Terre from "../assets/img_5terre.jpg";
-import imgMountains from "../assets/img_mountains.jpg";
-import imgLights from "../assets/img_lights.jpg";
-import imgForest from "../assets/img_forest.jpg";
 
-//
+// giat giat khi hover
+// click on the backdrop/poster to show detail of movie - detailPage
+// search result: by genre, by keyword
 function MGallery() {
+  const [movieGallery, setMovieGallery] = useState([]);
+
+  const navigate = useNavigate();
+
+  // api, top_rated
+  useEffect(() => {
+    fetch(
+      `${process.env.REACT_APP_BASE_URL}/movie/top_rated?api_key=${process.env.REACT_APP_API_KEY}`
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((response) => {
+        console.log("Movie gallery:", response.results);
+        setMovieGallery(response.results);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  console.log(movieGallery);
+
+  // movie detail
+  // addEventListener("clicked", () => {})
+  const handleDetail = (id) => {
+    navigate(`/detail/${id}`);
+  };
+
+  //
   return (
     <>
       <div>
-        <div className="responsive">
-          <div className="gallery">
-            <a target="_blank" href="img_5terre.jpg">
-              <img src={img5Terre} alt="Cinque Terre" />
-            </a>
-            <div className="desc">Add a description of the image here</div>
+        {/* href */}
+        {movieGallery?.map((movie) => (
+          <div className="responsive">
+            <div className="gallery">
+              <button target="_blank" href="/#">
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}.jpg`}
+                  alt={movie.title}
+                  key={movie.id}
+                  onClick={() => {
+                    handleDetail(movie.id);
+                  }}
+                />
+              </button>
+              <div className="desc">{movie?.title}</div>
+            </div>
           </div>
-        </div>
-
-        <div className="responsive">
-          <div className="gallery">
-            <a target="_blank" href="img_forest.jpg">
-              <img src={imgForest} alt="Forest" />
-            </a>
-            <div className="desc">Add a description of the image here</div>
-          </div>
-        </div>
-
-        <div className="responsive">
-          <div className="gallery">
-            <a target="_blank" href="img_lights.jpg">
-              <img src={imgLights} alt="Northern Lights" />
-            </a>
-            <div className="desc">Add a description of the image here</div>
-          </div>
-        </div>
-
-        <div className="responsive">
-          <div className="gallery">
-            <a target="_blank" href="img_mountains.jpg">
-              <img src={imgMountains} alt="Mountains" />
-            </a>
-            <div className="desc">Add a description of the image here</div>
-          </div>
-        </div>
+        ))}
 
         <div className="clearfix"></div>
       </div>

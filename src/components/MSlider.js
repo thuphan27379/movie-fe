@@ -1,93 +1,82 @@
 import React, { useEffect, useState } from "react";
-
 import "../css/Carousel.css";
 
-// authors, description, title, genres
+// giat giat khi chuyen slide
+// click on the backdrop/poster to show detail of movie - detailPage
 function MSlider() {
-  const [movieList, setMovieList] = useState();
+  const [movieList, setMovieList] = useState([]); //
+  const [slideIndex, setSlideIndex] = useState(0);
 
-  // api
+  // api popular
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_BASE_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`
     )
-      .then((response) => response.json())
-      .then((response) => setMovieList(response.results))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((response) => {
+        console.log("Movie list:", response.results);
+        setMovieList(response.results); //json
+      })
       .catch((err) => console.error(err));
   }, []);
 
-  console.log(movieList, "movie list");
+  console.log(movieList);
 
   // slide
-  let slideIndex = 1;
-  showSlides(slideIndex);
-
-  // Next/previous controls
   function plusSlides(n) {
-    showSlides((slideIndex += n));
+    const newIndex = slideIndex + n;
+    if (newIndex >= 0 && newIndex < movieList.length) {
+      setSlideIndex(newIndex);
+    }
   }
 
-  // Thumbnail image controls
   function currentSlide(n) {
-    showSlides((slideIndex = n));
+    if (n >= 0 && n < movieList.length) {
+      setSlideIndex(n);
+    }
   }
-  console.log(slideIndex);
-
-  function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
-
-    if (n > slides.length) {
-      slideIndex = 1;
-    }
-    if (n < 1) {
-      slideIndex = slides.length;
-    }
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-    }
-
-    console.log(slideIndex);
-
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
-  }
-  console.log(slideIndex);
 
   //
   return (
     <>
       <div>
-        {/* <h1>slider</h1> */}
         <div className="slideshow-container">
-          {movieList?.map((movie, index) => (
+          {movieList?.length > 0 && (
             <div className="mySlides fade">
+              <div className="numbertext" style={{ fontSize: "18px" }}>
+                {movieList[slideIndex].title}
+              </div>
               <img
-                key={movie.id}
-                src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}.jpg`}
-                alt={movie.title}
+                src={`https://image.tmdb.org/t/p/w500/${movieList[slideIndex].backdrop_path}.jpg`}
+                alt={movieList[slideIndex].title}
                 style={{ width: "100%" }}
+                key={movieList[slideIndex].id}
               />
-              <div className="text">{movie.title}</div>
+              <div className="text">{movieList[slideIndex].overview}</div>
             </div>
-          ))}
+          )}
 
           <button className="prev" onClick={() => plusSlides(-1)}>
             &#10094;
           </button>
-          <button className="next" onclick={() => plusSlides(1)}>
+          <button className="next" onClick={() => plusSlides(1)}>
             &#10095;
           </button>
         </div>
 
         <div style={{ textAlign: "center" }}>
-          <span className="dot" onClick={() => currentSlide(1)}></span>
-          <span className="dot" onClick={() => currentSlide(2)}></span>
-          <span className="dot" onClick={() => currentSlide(3)}></span>
+          {movieList?.map((_, index) => (
+            <span
+              className={`dot ${index === slideIndex ? "active" : ""}`}
+              key={index}
+              onClick={() => currentSlide(index)}
+            ></span>
+          ))}
         </div>
       </div>
     </>
