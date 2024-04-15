@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useParams } from "react";
 import "../css/SideBar.css";
+import { useSearchParams } from "react-router-dom"; //
 
 // genres list, handleMovieByGenre()
-// click on the genre and render movies of that genre,  get genre id => fetch movie by genre id => render to MGallery
+// click on the genre and render movies of that genre,
+// get genre id => fetch movie by genre id => render to MGallery
 function SideBar() {
   const [genresList, setGenresList] = React.useState([]);
+  const [movieByGenre, setMovieByGenre] = useState([]);
+  let [searchParams, setSearchParams] = useSearchParams(); //
 
-  // api genre list
+  // api genres list
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_BASE_URL}/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}`
@@ -24,6 +28,28 @@ function SideBar() {
       .catch((err) => console.error(err));
   }, []);
 
+  // movie list by genre
+  const handleMovieByGenre = (genreId) => {
+    // get movie by genre.id
+    // display movie - MGallery ?!?!
+    console.log(genreId);
+    fetch(
+      `${process.env.REACT_APP_BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=${genreId}`
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((response) => {
+        console.log("Movies by genre:", response.results);
+        setMovieByGenre(response.results); // Update movieByGenre state in parent component
+        setSearchParams({ genre: genreId });
+      })
+      .catch((err) => console.error(err));
+  };
+
   //
   return (
     <>
@@ -38,12 +64,16 @@ function SideBar() {
         <span>
           <h3>Category</h3>
         </span>
+
         <ul id="myMenu">
-          <button>Movie Genres List</button>
+          <h5>Movie Genres List</h5>
           {genresList?.map((genre) => (
             <li
               key={genre.id}
               style={{ fontSize: "14px", paddingLeft: "20px" }}
+              onClick={() => {
+                handleMovieByGenre(genre.id); //
+              }}
             >
               {genre.name}
             </li>

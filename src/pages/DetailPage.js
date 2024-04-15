@@ -1,10 +1,9 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "../css/Detail.css";
 
 // https://api.themoviedb.org/3/movie/{movie_id}/reviews
 // https://api.themoviedb.org/3/movie/{movie_id}/videos
-// https://api.themoviedb.org/3/movie/{movie_id}/release_dates
 function DetailPage() {
   // poster poster_path, title, authors, description - overview, genres, release_date, vote_average: 6.798 / vote_count: 287, video. popularity, language
   // get movie id
@@ -13,7 +12,6 @@ function DetailPage() {
   const [movieDetail, setMovieDetail] = useState();
 
   // api
-
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_BASE_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}`
@@ -36,28 +34,45 @@ function DetailPage() {
     <>
       <div style={{ paddingTop: "30px" }}>
         <p>Movie Detail Page</p>
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div
+          className="detail"
+          style={{ display: "flex", flexDirection: "row", paddingTop: "20px" }}
+        >
           {/* poster poster_path*/}
           <div>
             <img
               src={`https://image.tmdb.org/t/p/w500/${movieDetail?.poster_path}`}
               alt="" //{movieDetail?.title}
+              style={{ maxWidth: "350px" }}
             />
           </div>
 
           {/* detail info */}
-          <div>
-            <p>Movie Info</p>
+          <div
+            className="info"
+            style={{
+              paddingLeft: "20px",
+              lineHeight: "3.5px",
+              maxWidth: "700px",
+            }}
+          >
+            <p>Movie Info:</p>
+            {/* <br /> */}
             <p>Title: {movieDetail?.title}</p>
+            {/* ? year only */}
             <p>Release Date: {movieDetail?.release_date}</p>
-            {/* <p>{movieDetail?.genres}</p> */}
+            {movieDetail?.genres?.map((genre) => (
+              <p key={genre.id}>Genre: {genre.name}</p>
+            ))}
             <p>Voted: {movieDetail?.vote_average}</p>
             <p>Popularity: {movieDetail?.popularity}</p>
-            <p>Authors:</p>
+            {/* ? */}
+            <p>Authors - Company: {movieDetail?.production_companies.name}</p>
             <p>Overview: {movieDetail?.overview}</p>
+            {/* ! */}
             <p>Language: {movieDetail?.original_language}</p>
             <p>Homepage: {movieDetail?.homepage}</p>
-            <p>Video/trailer: {movieDetail?.video}</p>
+            <p>Video - Trailer: {movieDetail?.video}</p>
           </div>
         </div>
       </div>

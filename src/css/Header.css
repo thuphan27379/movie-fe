@@ -9,6 +9,11 @@
   font-size: 20px;
 }
 
+/* Hide the link that should open and close the header on small screens */
+.header .icon {
+  display: none;
+}
+
 button {
   border: none;
   cursor: pointer;
@@ -24,10 +29,12 @@ button {
   font-size: 18px;
   line-height: 25px;
   border-radius: 4px;
+  display: block;
+  text-align: center;
 }
 
 .header a.logo {
-  font-size: 25px;
+  font-size: 40px;
   font-weight: bold;
 }
 
@@ -49,6 +56,7 @@ button {
   line-height: 0;
   padding: 0;
   margin: 0;
+  font-size: 18px;
 }
 
 @media screen and (max-width: 500px) {
@@ -62,15 +70,6 @@ button {
   }
 }
 
-.header input[type="text"] {
-  float: right;
-  padding: 6px;
-  border: none;
-  margin-top: 8px;
-  margin-right: 16px;
-  font-size: 17px;
-}
-
 @media screen and (max-width: 600px) {
   .header input[type="text"] {
     float: none;
@@ -82,5 +81,33 @@ button {
   }
   .header input[type="text"] {
     border: 1px solid #ccc;
+  }
+}
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the header (.icon) */
+@media screen and (max-width: 600px) {
+  .header a:not(:first-child) {
+    display: none;
+  }
+  .header a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+/* The "responsive" class is added to the header with JavaScript when the user clicks on the icon. This class makes the header look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 600px) {
+  .header.responsive {
+    position: relative;
+  }
+  .header.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .header.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
   }
 }

@@ -8,6 +8,7 @@
   position: relative;
   margin: auto;
   overflow: hidden;
+  margin-top: 10px;
 }
 
 .slides {

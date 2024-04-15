@@ -48,7 +48,14 @@ function MSlider() {
         <div className="slideshow-container">
           {movieList?.length > 0 && (
             <div className="mySlides fade">
-              <div className="numbertext" style={{ fontSize: "18px" }}>
+              <div
+                className="numbertext"
+                style={{
+                  fontSize: "30px",
+                  paddingTop: "20px",
+                  paddingLeft: "20px",
+                }}
+              >
                 {movieList[slideIndex].title}
               </div>
               <img

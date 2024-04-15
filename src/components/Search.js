@@ -1,45 +1,25 @@
 import React, { useState, useEffect, useForm } from "react";
 import "../css/Search.css";
-import MGallery from "./MGallery";
+import { useSearchParams } from "react-router-dom"; //
 
-// search by keyword
-// https://api.themoviedb.org/3/search/keyword
+//
 function Search() {
-  // const [getMovie, setGetMovie] = useState();
-
-  const [data, setData] = useState([]);
+  let [searchParams, setSearchParams] = useSearchParams(); //
   const [query, setQuery] = useState(""); // get input keyword
 
+  // form onSubmit
   const handleInput = (e) => {
     e.preventDefault();
-
-    console.log(e.target.value);
   };
 
+  // onChange
   const handleChange = (e) => {
     const { value } = e.target;
-    setQuery(value);
+    setSearchParams({ search: value }); //
+    setQuery(value); //
   };
 
-  // api
-  useEffect(() => {
-    fetch(
-      `${process.env.REACT_APP_BASE_URL}search/movie?query=${query}?api_key=${process.env.REACT_APP_API_KEY}`
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((response) => {
-        console.log("Movie search", response);
-        setData(response);
-      })
-      .catch((err) => console.error(err));
-  }, [query]);
-
-  // display result <MGallery/>
+  //
   return (
     <>
       <div>
@@ -55,8 +35,9 @@ function Search() {
             name="search"
             value={query}
             style={{ color: "black", maxHeight: "40px" }}
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleChange(e)} //
           />
+
           <button
             type="submit"
             style={{ backgroundColor: "black", maxHeight: "40px" }}
@@ -64,8 +45,6 @@ function Search() {
             <i className="fa fa-search"></i>
           </button>
         </form>
-
-        {/*   {search(data).map((dataObj) => {return ( <MGallery />)} */}
       </div>
     </>
   );

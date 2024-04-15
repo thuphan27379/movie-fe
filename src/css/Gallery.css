@@ -1,13 +1,13 @@
-/* div.gallery {
-  border: 1px solid #ccc;
-} */
+div.gallery {
+  margin-top: 20px;
+}
 
 div.gallery:hover {
-  border: 1px solid #777;
+  cursor: pointer;
 }
 
 div.gallery img {
-  width: 100%;
+  width: 70%;
   height: auto;
 }
 
