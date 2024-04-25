@@ -33,7 +33,7 @@ function DetailPage() {
   return (
     <>
       <div style={{ paddingTop: "30px" }}>
-        <p>Movie Detail Page</p>
+        <p style={{ fontSize: "20px" }}>Movie Detail Information:</p>
         <div
           className="detail"
           style={{ display: "flex", flexDirection: "row", paddingTop: "20px" }}
@@ -43,7 +43,7 @@ function DetailPage() {
             <img
               src={`https://image.tmdb.org/t/p/w500/${movieDetail?.poster_path}`}
               alt="" //{movieDetail?.title}
-              style={{ maxWidth: "350px" }}
+              style={{ maxWidth: "365px" }}
             />
           </div>
 
@@ -51,26 +51,32 @@ function DetailPage() {
           <div
             className="info"
             style={{
-              paddingLeft: "20px",
-              lineHeight: "3.5px",
+              paddingLeft: "30px",
+              lineHeight: "3.5",
               maxWidth: "700px",
             }}
           >
-            <p>Movie Info:</p>
-            {/* <br /> */}
             <p>Title: {movieDetail?.title}</p>
+            <p>Original Title: {movieDetail?.original_title}</p>
             {/* ? year only */}
-            <p>Release Date: {movieDetail?.release_date}</p>
+            <p>Released On: {movieDetail?.release_date}</p>
+            {/* ? */}
             {movieDetail?.genres?.map((genre) => (
               <p key={genre.id}>Genre: {genre.name}</p>
             ))}
             <p>Voted: {movieDetail?.vote_average}</p>
             <p>Popularity: {movieDetail?.popularity}</p>
             {/* ? */}
-            <p>Authors - Company: {movieDetail?.production_companies.name}</p>
+            {movieDetail?.production_companies?.map((company) => (
+              <p key={company.id}>Authors - Company: {company.name}</p>
+            ))}
             <p>Overview: {movieDetail?.overview}</p>
-            {/* ! */}
-            <p>Language: {movieDetail?.original_language}</p>
+            {/* ?! */}
+            {movieDetail?.spoken_languages?.map((language) => (
+              <p key={language.id}>
+                Original Language: {language.english_name}
+              </p>
+            ))}
             <p>Homepage: {movieDetail?.homepage}</p>
             <p>Video - Trailer: {movieDetail?.video}</p>
           </div>

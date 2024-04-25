@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-//searchParams
+//
 export default function PaginationComponent({ totalPage }) {
   const handleChangePage = (item) => {
     console.log(item, "item");

@@ -21,8 +21,10 @@ function MGallery({ movieByGenre }) {
 
     if (valueQuery) {
       url += `search/movie?query=${valueQuery}&`;
+      // sort by genre
     } else if (valueGenre) {
       url += `discover/movie?with_genres=${valueGenre}&`;
+      // landing default
     } else {
       url += `movie/top_rated?`;
     }
@@ -43,24 +45,6 @@ function MGallery({ movieByGenre }) {
       })
       .catch((err) => console.error(err));
   }, [valueQuery, valueGenre]);
-
-  // else if (movieByGenre.length > 0) {
-  // // movie by genre
-  // // setMovieGallery(movieByGenre);
-  // fetch(
-  //   `${process.env.REACT_APP_BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=${genreId}`
-  // )
-  //   .then((response) => {
-  //     if (!response.ok) {
-  //       throw new Error("Network response was not ok");
-  //     }
-  //     return response.json();
-  //   })
-  //   .then((response) => {
-  //     console.log("Movies by genre:", response.results);
-  //     setMovieGallery(response.results); //
-  //   })
-  //   .catch((err) => console.error(err));
 
   //   else {
   //     // top_rated
@@ -106,7 +90,9 @@ function MGallery({ movieByGenre }) {
                   }}
                 />
               </button>
-              <div className="desc">{movie?.title}</div>
+              <div className="desc">
+                {movie?.title} <p style={{ fontSize: "12px" }}>Watch Trailer</p>
+              </div>
             </div>
           </div>
         ))}
