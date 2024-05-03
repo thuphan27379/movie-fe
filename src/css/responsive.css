@@ -3,11 +3,11 @@
 }
 
 /* tablet >=768px*/
-@media (min-width: 740px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1023px) {
 }
 
 /* mobile <768px*/
-@media (max-width: 739px) {
+@media (max-width: 767px) {
 }
 
 /* 1280px */

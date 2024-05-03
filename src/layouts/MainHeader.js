@@ -1,17 +1,15 @@
 import * as React from "react";
 import "../css/Header.css";
-import "../css/Pagination.css";
 
-// chinh lai css
 /* Toggle between adding and removing the "responsive" class to header when the user clicks on the icon */
-function myFunction() {
-  var x = document.getElementById("header");
-  if (x.className === "header") {
-    x.className += " responsive";
-  } else {
-    x.className = "header";
-  }
-}
+// function myFunction() {
+//   var x = document.getElementById("header");
+//   if (x.className === "header") {
+//     x.className += " responsive";
+//   } else {
+//     x.className = "header";
+//   }
+// }
 
 function MainHeader() {
   //
@@ -21,14 +19,16 @@ function MainHeader() {
         <div
           className="header"
           id="header"
-          style={{ maxHeight: "70px", fontSize: "40px" }}
+          style={{ maxHeight: "60px", fontSize: "40px" }}
         >
-          <p target="#" index className="logo" style={{ fontSize: "25px" }}>
-            Movie App
-          </p>
+          <a className="logo" href="/">
+            <p target="/" index className="logo" style={{ fontSize: "25px" }}>
+              Movie App
+            </p>
+          </a>
 
-          {/* chinh hoai k dc */}
-          <div
+          {/* menu: chinh hoai k dc */}
+          {/* <div
             className="header-right"
             style={{
               display: "flex",
@@ -53,7 +53,7 @@ function MainHeader() {
             >
               <i class="fa fa-bars"></i>
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

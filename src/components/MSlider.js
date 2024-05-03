@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/Carousel.css";
 
-// giat giat khi chuyen slide
-// click on the backdrop/poster to show detail of movie - detailPage
+//// giat giat khi hover
 function MSlider() {
   const [movieList, setMovieList] = useState([]); //
   const [slideIndex, setSlideIndex] = useState(0);
@@ -45,14 +44,14 @@ function MSlider() {
   return (
     <>
       <div>
-        <div className="slideshow-container">
+        <div className="slideshow-container" style={{ maxWidth: "850px" }}>
           {movieList?.length > 0 && (
             <div className="mySlides fade">
               <div
                 className="numbertext"
                 style={{
                   fontSize: "30px",
-                  paddingTop: "20px",
+                  paddingTop: "30px",
                   paddingLeft: "20px",
                 }}
               >

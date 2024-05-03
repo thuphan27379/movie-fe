@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../css/Detail.css";
+import Box from "@mui/material/Box";
 
 // https://api.themoviedb.org/3/movie/{movie_id}/reviews
 // https://api.themoviedb.org/3/movie/{movie_id}/videos
@@ -43,7 +44,7 @@ function DetailPage() {
             <img
               src={`https://image.tmdb.org/t/p/w500/${movieDetail?.poster_path}`}
               alt="" //{movieDetail?.title}
-              style={{ maxWidth: "365px" }}
+              style={{ maxWidth: "300px" }}
             />
           </div>
 
@@ -52,8 +53,8 @@ function DetailPage() {
             className="info"
             style={{
               paddingLeft: "30px",
-              lineHeight: "3.5",
-              maxWidth: "700px",
+              lineHeight: "2",
+              maxWidth: "800px",
             }}
           >
             <p>Title: {movieDetail?.title}</p>
@@ -61,22 +62,57 @@ function DetailPage() {
             {/* ? year only */}
             <p>Released On: {movieDetail?.release_date}</p>
             {/* ? */}
-            {movieDetail?.genres?.map((genre) => (
-              <p key={genre.id}>Genre: {genre.name}</p>
-            ))}
+            <Box
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                flexDirection: "center",
+                alignContent: "center",
+              }}
+            >
+              Genre:
+              {movieDetail?.genres?.map((genre) => (
+                <p key={genre.id}>{genre.name}, </p>
+              ))}
+            </Box>
             <p>Voted: {movieDetail?.vote_average}</p>
             <p>Popularity: {movieDetail?.popularity}</p>
             {/* ? */}
-            {movieDetail?.production_companies?.map((company) => (
-              <p key={company.id}>Authors - Company: {company.name}</p>
-            ))}
+            <Box
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                flexDirection: "center",
+                alignContent: "center",
+              }}
+            >
+              Company:
+              {movieDetail?.production_companies?.map((company) => (
+                <p
+                  style={{
+                    display: "inline-flex",
+                  }}
+                  key={company.id}
+                >
+                  {company.name},
+                </p>
+              ))}
+            </Box>
             <p>Overview: {movieDetail?.overview}</p>
             {/* ?! */}
-            {movieDetail?.spoken_languages?.map((language) => (
-              <p key={language.id}>
-                Original Language: {language.english_name}
-              </p>
-            ))}
+            <Box
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                flexDirection: "center",
+                alignContent: "center",
+              }}
+            >
+              Original Language:
+              {movieDetail?.spoken_languages?.map((language) => (
+                <p key={language.id}>{language.english_name}, </p>
+              ))}
+            </Box>
             <p>Homepage: {movieDetail?.homepage}</p>
             <p>Video - Trailer: {movieDetail?.video}</p>
           </div>

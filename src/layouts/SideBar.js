@@ -64,21 +64,7 @@ function SideBar() {
         <span>
           <h3>Category</h3>
         </span>
-
-        <ul id="myMenu">
-          <h5>Movie Genres List</h5>
-          {genresList?.map((genre) => (
-            <li
-              key={genre.id}
-              style={{ fontSize: "14px", paddingLeft: "20px" }}
-              onClick={() => {
-                handleMovieByGenre(genre.id); //
-              }}
-            >
-              {genre.name}
-            </li>
-          ))}
-
+        <ul>
           <li>
             <button>Movie Certifications</button>
           </li>
@@ -100,6 +86,22 @@ function SideBar() {
           <li>
             <button>Upcoming</button>
           </li>
+        </ul>
+
+        {/* genres */}
+        <ul id="myMenu">
+          <h5>Movie Genres List</h5>
+          {genresList?.map((genre) => (
+            <li
+              key={genre.id}
+              style={{ fontSize: "14px", paddingLeft: "20px" }}
+              onClick={() => {
+                handleMovieByGenre(genre.id); //
+              }}
+            >
+              {genre.name}
+            </li>
+          ))}
         </ul>
       </div>
     </>

@@ -12,7 +12,7 @@ function HomePage() {
           display: "flex",
           flexDirection: "column",
           paddingTop: "30px",
-          // marginLeft: "240px",
+          marginLeft: "60px",
         }}
       >
         {/* Breadcrumb */}

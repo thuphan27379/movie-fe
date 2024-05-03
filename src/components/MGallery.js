@@ -10,26 +10,28 @@ function MGallery({ movieByGenre }) {
   const [movieGallery, setMovieGallery] = useState([]);
   const navigate = useNavigate();
   let [searchParams, setSearchParams] = useSearchParams(); //
-  const valueQuery = searchParams.get("search"); //
-  const valueGenre = searchParams.get("genre");
+  const valueQuery = searchParams.get("search"); //by keyword
+  const valueGenre = searchParams.get("genre"); //by genre
   const [totalPage, setTotalPage] = useState();
+
+  const valuePage = searchParams.get("page") || 1; //pagination
 
   // api
   useEffect(() => {
-    // search by keyword
     let url = `${process.env.REACT_APP_BASE_URL}`;
 
+    // search by keyword
     if (valueQuery) {
       url += `search/movie?query=${valueQuery}&`;
       // sort by genre
     } else if (valueGenre) {
       url += `discover/movie?with_genres=${valueGenre}&`;
-      // landing default
+      // landing default top_rated
     } else {
       url += `movie/top_rated?`;
     }
 
-    url += `api_key=${process.env.REACT_APP_API_KEY}`;
+    url += `api_key=${process.env.REACT_APP_API_KEY}&page=${valuePage}`; //&page=
 
     fetch(url)
       .then((response) => {
@@ -44,7 +46,7 @@ function MGallery({ movieByGenre }) {
         setTotalPage(response.total_pages);
       })
       .catch((err) => console.error(err));
-  }, [valueQuery, valueGenre]);
+  }, [valueQuery, valueGenre, valuePage]);
 
   //   else {
   //     // top_rated

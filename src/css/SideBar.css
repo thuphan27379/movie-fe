@@ -1,5 +1,5 @@
 .sidebar {
-  width: 240px;
+  width: 300px;
   /* margin: 0;
   padding: 0; */
   /* position: fixed;
@@ -8,7 +8,7 @@
 }
 
 ul button {
-  width: 240px;
+  /* width: 240px; */
   border: none;
   cursor: pointer;
   height: 30px;
