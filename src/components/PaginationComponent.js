@@ -1,9 +1,6 @@
 import * as React from "react";
 import Pagination from "@mui/material/Pagination";
-// import PaginationItem from "@mui/material/PaginationItem";
 import Stack from "@mui/material/Stack";
-// import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-// import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useSearchParams } from "react-router-dom";
 
 //
@@ -19,12 +16,18 @@ export default function PaginationComponent({ totalPage }) {
   // custom css
   // .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root {}
   return (
-    <Stack spacing={2}>
+    <Stack
+      spacing={2}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       <Pagination
         sx={{
           "& .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root": {
             color: "white",
-            // minWidth: "100px",
+            padding: "0 20px",
           },
           "& .css-1v2lvtn-MuiPaginationItem-root": {
             color: "white",
@@ -32,8 +35,10 @@ export default function PaginationComponent({ totalPage }) {
           "& .css-1ijdzd6-MuiPagination-root": {
             minWidth: "100px",
           },
-
           minWidth: "100px",
+          display: "flex",
+          justifyContent: "center",
+          paddingRight: "30px",
         }}
         size="medium"
         variant="text"

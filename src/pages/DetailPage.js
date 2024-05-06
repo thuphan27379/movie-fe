@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 // https://api.themoviedb.org/3/movie/{movie_id}/reviews
 // https://api.themoviedb.org/3/movie/{movie_id}/videos
 function DetailPage() {
-  // poster poster_path, title, authors, description - overview, genres, release_date, vote_average: 6.798 / vote_count: 287, video. popularity, language
+  // poster poster_path, title, authors, description - overview, genres, release_date, vote_average: 6.798 / vote_count: 287, video, popularity, language
   // get movie id
   const params = useParams();
   console.log(params);
@@ -33,7 +33,7 @@ function DetailPage() {
   //
   return (
     <>
-      <div style={{ paddingTop: "30px" }}>
+      <div style={{ paddingTop: "30px", fontSize: "20px" }}>
         <p style={{ fontSize: "20px" }}>Movie Detail Information:</p>
         <div
           className="detail"
@@ -55,6 +55,7 @@ function DetailPage() {
               paddingLeft: "30px",
               lineHeight: "2",
               maxWidth: "800px",
+              fontSize: "20px",
             }}
           >
             <p>Title: {movieDetail?.title}</p>
@@ -68,11 +69,12 @@ function DetailPage() {
                 alignItems: "center",
                 flexDirection: "center",
                 alignContent: "center",
+                fontSize: "20px",
               }}
             >
               Genre:
               {movieDetail?.genres?.map((genre) => (
-                <p key={genre.id}>{genre.name}, </p>
+                <p key={genre.id}> {genre.name}, </p>
               ))}
             </Box>
             <p>Voted: {movieDetail?.vote_average}</p>
@@ -84,6 +86,7 @@ function DetailPage() {
                 alignItems: "center",
                 flexDirection: "center",
                 alignContent: "center",
+                fontSize: "20px",
               }}
             >
               Company:
@@ -106,11 +109,12 @@ function DetailPage() {
                 alignItems: "center",
                 flexDirection: "center",
                 alignContent: "center",
+                fontSize: "20px",
               }}
             >
               Original Language:
               {movieDetail?.spoken_languages?.map((language) => (
-                <p key={language.id}>{language.english_name}, </p>
+                <p key={language.id}> {language.english_name},</p>
               ))}
             </Box>
             <p>Homepage: {movieDetail?.homepage}</p>

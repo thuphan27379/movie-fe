@@ -44,15 +44,18 @@ function MSlider() {
   return (
     <>
       <div>
-        <div className="slideshow-container" style={{ maxWidth: "850px" }}>
+        <div
+          className="slideshow-container"
+          style={{ maxWidth: "850px", paddingTop: 0, marginTop: 0 }}
+        >
           {movieList?.length > 0 && (
             <div className="mySlides fade">
               <div
                 className="numbertext"
                 style={{
-                  fontSize: "30px",
-                  paddingTop: "30px",
-                  paddingLeft: "20px",
+                  fontSize: "35px",
+                  paddingTop: "50px",
+                  paddingLeft: "30px",
                 }}
               >
                 {movieList[slideIndex].title}

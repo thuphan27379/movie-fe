@@ -11,7 +11,7 @@ function HomePage() {
         style={{
           display: "flex",
           flexDirection: "column",
-          paddingTop: "30px",
+          paddingTop: "20px",
           marginLeft: "60px",
         }}
       >

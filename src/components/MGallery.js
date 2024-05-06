@@ -43,7 +43,7 @@ function MGallery({ movieByGenre }) {
       .then((response) => {
         console.log("Movie", response);
         setMovieGallery(response.results);
-        setTotalPage(response.total_pages);
+        setTotalPage(response.total_pages); //totalPage
       })
       .catch((err) => console.error(err));
   }, [valueQuery, valueGenre, valuePage]);
@@ -78,7 +78,7 @@ function MGallery({ movieByGenre }) {
   //
   return (
     <>
-      <div>
+      <div style={{ paddingTop: 0 }}>
         {movieGallery?.map((movie) => (
           <div className="responsive">
             <div className="gallery">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useParams } from "react";
 import "../css/SideBar.css";
-import { useSearchParams } from "react-router-dom"; //
+import { useSearchParams, useNavigate } from "react-router-dom"; //
 
 // genres list, handleMovieByGenre()
 // click on the genre and render movies of that genre,
@@ -9,6 +9,7 @@ function SideBar() {
   const [genresList, setGenresList] = React.useState([]);
   const [movieByGenre, setMovieByGenre] = useState([]);
   let [searchParams, setSearchParams] = useSearchParams(); //
+  const navigate = useNavigate(); //
 
   // api genres list
   useEffect(() => {
@@ -45,7 +46,10 @@ function SideBar() {
       .then((response) => {
         console.log("Movies by genre:", response.results);
         setMovieByGenre(response.results); // Update movieByGenre state in parent component
-        setSearchParams({ genre: genreId });
+        // navigate("/${genreId}").then(() => {
+        //   setSearchParams({ genre: genreId });
+        //   console.log("navigate genre");
+        // });
       })
       .catch((err) => console.error(err));
   };
@@ -57,7 +61,7 @@ function SideBar() {
         className="sidebar"
         style={{
           minWidth: "240px",
-          paddingTop: "30px",
+          paddingTop: "20px",
           paddingLeft: "10px",
         }}
       >
@@ -85,6 +89,12 @@ function SideBar() {
           </li>
           <li>
             <button>Upcoming</button>
+          </li>
+          <li>
+            <button>Trending</button>
+          </li>
+          <li>
+            <button>In Theaters</button>
           </li>
         </ul>
 
