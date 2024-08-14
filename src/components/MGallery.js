@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom"; //
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "../css/Gallery.css";
 import PaginationComponent from "./PaginationComponent";
 
@@ -7,30 +7,31 @@ import PaginationComponent from "./PaginationComponent";
 // click on the backdrop/poster to show detail of movie - detailPage
 // search result: by genre, by keyword
 function MGallery({ movieByGenre }) {
+  // movieByGenre from SideBar.js
   const [movieGallery, setMovieGallery] = useState([]);
   const navigate = useNavigate();
-  let [searchParams, setSearchParams] = useSearchParams(); //
+  let [searchParams, setSearchParams] = useSearchParams();
   const valueQuery = searchParams.get("search"); //by keyword
-  const valueGenre = searchParams.get("genre"); //by genre
-  const [totalPage, setTotalPage] = useState();
-
+  const valueGenre = searchParams.get("genreId"); //by genre /// SAI CHO NAY NE
   const valuePage = searchParams.get("page") || 1; //pagination
+  const [totalPage, setTotalPage] = useState();
 
   // api
   useEffect(() => {
     let url = `${process.env.REACT_APP_BASE_URL}`;
 
-    // search by keyword
+    // search by keyword OK
     if (valueQuery) {
       url += `search/movie?query=${valueQuery}&`;
       // sort by genre
     } else if (valueGenre) {
       url += `discover/movie?with_genres=${valueGenre}&`;
-      // landing default top_rated
+      // landing default top_rated OK
     } else {
       url += `movie/top_rated?`;
     }
 
+    /// SAI CHO NAY NE
     url += `api_key=${process.env.REACT_APP_API_KEY}&page=${valuePage}`; //&page=
 
     fetch(url)
@@ -42,7 +43,7 @@ function MGallery({ movieByGenre }) {
       })
       .then((response) => {
         console.log("Movie", response);
-        setMovieGallery(response.results);
+        setMovieGallery(response.results); //gallery & result
         setTotalPage(response.total_pages); //totalPage
       })
       .catch((err) => console.error(err));
@@ -80,9 +81,9 @@ function MGallery({ movieByGenre }) {
     <>
       <div style={{ paddingTop: 0 }}>
         {movieGallery?.map((movie) => (
-          <div className="responsive">
+          <div className="responsive" key={movie?.id}>
             <div className="gallery">
-              <button target="_blank" href="/#">
+              <button>
                 <img
                   src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}.jpg`}
                   alt={movie.title}

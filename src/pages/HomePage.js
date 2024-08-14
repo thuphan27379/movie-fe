@@ -1,7 +1,6 @@
 import React from "react";
 import MSlider from "../components/MSlider";
 import MGallery from "../components/MGallery";
-import "../css/Breadcrumb.css";
 
 // Outlet: MAIN CONTENT
 function HomePage() {
@@ -15,15 +14,13 @@ function HomePage() {
           marginLeft: "60px",
         }}
       >
-        {/* Breadcrumb */}
-
         {/* carousel */}
         <div>
           <h3>Trending</h3>
           <MSlider />
         </div>
 
-        {/* gallery, search result */}
+        {/* gallery & search result */}
         <div>
           <h3>Gallery</h3>
           <MGallery />

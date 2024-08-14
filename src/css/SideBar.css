@@ -44,9 +44,11 @@ ul button {
     height: auto;
     position: relative;
   }
+
   .sidebar a {
     float: left;
   }
+
   div.content {
     margin-left: 0;
   }
@@ -54,6 +56,10 @@ ul button {
 
 /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
 @media screen and (max-width: 400px) {
+  .sidebar {
+    display: none;
+  }
+
   .sidebar a {
     text-align: center;
     float: none;

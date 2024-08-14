@@ -14,7 +14,6 @@ export default function PaginationComponent({ totalPage }) {
   };
 
   // custom css
-  // .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root {}
   return (
     <Stack
       spacing={2}
@@ -25,16 +24,6 @@ export default function PaginationComponent({ totalPage }) {
     >
       <Pagination
         sx={{
-          "& .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root": {
-            color: "white",
-            padding: "0 20px",
-          },
-          "& .css-1v2lvtn-MuiPaginationItem-root": {
-            color: "white",
-          },
-          "& .css-1ijdzd6-MuiPagination-root": {
-            minWidth: "100px",
-          },
           minWidth: "100px",
           display: "flex",
           justifyContent: "center",

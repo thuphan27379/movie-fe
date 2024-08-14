@@ -1,7 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
 /* Style the search field */
 form.example input[type="search"] {
   padding: 10px;

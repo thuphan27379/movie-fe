@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useForm } from "react";
+import { useSearchParams } from "react-router-dom";
 import "../css/Search.css";
-import { useSearchParams } from "react-router-dom"; //
 
-//
+// search by name
 function Search() {
-  let [searchParams, setSearchParams] = useSearchParams(); //
+  let [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(""); // get input keyword
 
   // form onSubmit

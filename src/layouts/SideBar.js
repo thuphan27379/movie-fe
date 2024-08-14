@@ -1,30 +1,30 @@
 import React, { useState, useEffect, useParams } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import "../css/SideBar.css";
-import { useSearchParams, useNavigate } from "react-router-dom"; //
 
 // genres list, handleMovieByGenre()
 // click on the genre and render movies of that genre,
 // get genre id => fetch movie by genre id => render to MGallery
 function SideBar() {
-  const [genresList, setGenresList] = React.useState([]);
+  const [genresList, setGenresList] = useState([]); //
   const [movieByGenre, setMovieByGenre] = useState([]);
   let [searchParams, setSearchParams] = useSearchParams(); //
-  const navigate = useNavigate(); //
+  const navigate = useNavigate();
 
   // api genres list
   useEffect(() => {
     fetch(
-      `${process.env.REACT_APP_BASE_URL}/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}`
+      `${process.env.REACT_APP_BASE_URL}genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}` //
     )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        return response.json();
+        return response.json(); //
       })
       .then((response) => {
         console.log("Genres list:", response.genres);
-        setGenresList(response.genres); //
+        setGenresList(response.genres); // genres list
       })
       .catch((err) => console.error(err));
   }, []);
@@ -32,11 +32,11 @@ function SideBar() {
   // movie list by genre
   const handleMovieByGenre = (genreId) => {
     // get movie by genre.id
-    // display movie - MGallery ?!?!
+    // display movie - MGallery
     console.log(genreId);
     fetch(
-      `${process.env.REACT_APP_BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=${genreId}`
-    )
+      `${process.env.REACT_APP_BASE_URL}discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=${genreId}` //
+    ) // SAI CHO NAY NE
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -46,10 +46,10 @@ function SideBar() {
       .then((response) => {
         console.log("Movies by genre:", response.results);
         setMovieByGenre(response.results); // Update movieByGenre state in parent component
-        // navigate("/${genreId}").then(() => {
-        //   setSearchParams({ genre: genreId });
-        //   console.log("navigate genre");
-        // });
+        setSearchParams({ genre: genreId }); //
+        navigate(`/?genreId=${genreId}`).then(() => {
+          console.log("navigate genre"); //navigate to gallery /// SAI CHO NAY NE
+        });
       })
       .catch((err) => console.error(err));
   };
@@ -65,6 +65,24 @@ function SideBar() {
           paddingLeft: "10px",
         }}
       >
+        {/* genres */}
+        <ul id="myMenu">
+          <h4>Movie Genres List</h4>
+
+          {genresList?.map((genre) => (
+            <li
+              style={{ fontSize: "14px", paddingLeft: "20px" }}
+              key={genre.id}
+              value={genre.id} ///
+              onClick={() => {
+                handleMovieByGenre(genre.id); //
+              }}
+            >
+              {genre.name}
+            </li>
+          ))}
+        </ul>
+
         <span>
           <h3>Category</h3>
         </span>
@@ -96,22 +114,6 @@ function SideBar() {
           <li>
             <button>In Theaters</button>
           </li>
-        </ul>
-
-        {/* genres */}
-        <ul id="myMenu">
-          <h5>Movie Genres List</h5>
-          {genresList?.map((genre) => (
-            <li
-              key={genre.id}
-              style={{ fontSize: "14px", paddingLeft: "20px" }}
-              onClick={() => {
-                handleMovieByGenre(genre.id); //
-              }}
-            >
-              {genre.name}
-            </li>
-          ))}
         </ul>
       </div>
     </>

@@ -15,8 +15,8 @@ function DetailPage() {
   // api
   useEffect(() => {
     fetch(
-      `${process.env.REACT_APP_BASE_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}`
-    )
+      `${process.env.REACT_APP_BASE_URL}movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}`
+    ) /// SAI CHO NAY NE
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

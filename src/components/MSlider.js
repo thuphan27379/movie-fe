@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "../css/Carousel.css";
 
-//// giat giat khi hover
+// giat giat khi hover
 function MSlider() {
-  const [movieList, setMovieList] = useState([]); //
+  const [movieList, setMovieList] = useState([]);
   const [slideIndex, setSlideIndex] = useState(0);
 
   // api popular
   useEffect(() => {
     fetch(
-      `${process.env.REACT_APP_BASE_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`
+      /// SAI CHO NAY NE
+      `${process.env.REACT_APP_BASE_URL}movie/popular?api_key=${process.env.REACT_APP_API_KEY}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -46,7 +47,7 @@ function MSlider() {
       <div>
         <div
           className="slideshow-container"
-          style={{ maxWidth: "850px", paddingTop: 0, marginTop: 0 }}
+          style={{ maxWidth: "750px", paddingTop: 0, marginTop: 0 }}
         >
           {movieList?.length > 0 && (
             <div className="mySlides fade">
